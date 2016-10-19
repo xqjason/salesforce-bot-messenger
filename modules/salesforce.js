@@ -73,6 +73,23 @@ let findContactsByAccount = accountId => {
 
 };
 
+let findOpportunitiesByAccount = accountId => {
+
+    return new Promise((resolve, reject) => {
+        let q = "SELECT Id, Name, Amount, Probability, StageName, CloseDate, Account.Name, Picture_URL__c FROM Opportunity WHERE isClosed=false AND Account.Id = '" + accountId + "' LIMIT 5";
+        org.query({query: q}, (err, resp) => {
+            if (err) {
+                console.error(err);
+                reject("An error as occurred");
+            } else if (resp.records && resp.records.length>0) {
+                let opportunities = resp.records;
+                resolve(opportunities);
+            }
+        });
+    });
+
+};
+
 let getTopOpportunities = count => {
 
     count = count || 5;
