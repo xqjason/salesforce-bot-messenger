@@ -98,7 +98,7 @@ let handlePost = (req, res) => {
                 sendMessage({text: "OK, looking for your open opportunities at " + payload[2] + "..."}, sender);
                 salesforce.findOpportunitiesByAccount(payload[1]).then(opportunities => sendMessage(formatter.formatOpportunities(opportunities), sender));
             } else if (payload[0] === "close_won") {
-                sendMessage({text: `OK, I closed the opportunity "${payload[2]}" as "Close Won". Way to go Christophe!`}, sender);
+                sendMessage({text: `OK, I closed the opportunity "${payload[2]}" as "Close Won". `}, sender);
             } else if (payload[0] === "close_lost") {
                 sendMessage({text: `I'm sorry to hear that. I closed the opportunity "${payload[2]}" as "Close Lost".`}, sender);
             }
