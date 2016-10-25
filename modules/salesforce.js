@@ -105,7 +105,11 @@ let closeWonOpportunityById = opptyId => {
             var oppty = resp.records[0];
             oppty.set('StageName', 'Closed Won');
             org.update({ sobject: oppty }, function(err, resp){
-              if(!err) console.log('It worked!');
+              if(!err){
+                    console.log('It worked!');
+                }else{
+                    console.error(err);
+                }
             });
         }
     });
