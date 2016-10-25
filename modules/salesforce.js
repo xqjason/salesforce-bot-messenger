@@ -95,7 +95,7 @@ let closeWonOpportunityById = opptyId => {
     
     console.log('closeWonOpportunityById');
 
-    let q = "SELECT StageName FROM Opportunity WHERE Id = '" + opptyId + "' LIMIT 1";
+    let q = "SELECT Id, StageName FROM Opportunity WHERE Id = '" + opptyId + "' LIMIT 1";
     org.query({query: q}, (err, resp) => {
         if (err) {
             console.error(err);
@@ -103,6 +103,9 @@ let closeWonOpportunityById = opptyId => {
             console.log('record found');
 
             var oppty = resp.records[0];
+
+            console.log(oppty);
+
             oppty.set('StageName', 'Closed Won');
             org.update({ sobject: oppty }, function(err, resp){
               if(!err){
