@@ -93,11 +93,15 @@ let findOpportunitiesByAccount = accountId => {
 
 let closeWonOpportunityById = opptyId => {
     
+    console.log('closeWonOpportunityById');
+
     let q = "SELECT StageName FROM Opportunity WHERE Id = '" + opptyId + "' LIMIT 1";
     org.query({query: q}, (err, resp) => {
         if (err) {
             console.error(err);
-        } else if (resp.records && resp.records.length>0) {                
+        } else if (resp.records && resp.records.length>0) { 
+            console.log('record found');
+
             var oppty = resp.records[0];
             oppty.set('StageName', 'Closed Won');
             org.update({ sobject: oppty }, function(err, resp){
