@@ -90,6 +90,24 @@ let findOpportunitiesByAccount = accountId => {
 
 };
 
+
+let closeWonOpportunityById = opptyId => {
+    
+    let q = "SELECT StageName FROM Opportunity WHERE Id = '" + opptyId + "' LIMIT 1";
+    org.query({query: q}, (err, resp) => {
+        if (err) {
+            console.error(err);
+        } else if (resp.records && resp.records.length>0) {                
+            var oppty = resp.records[0];
+            oppty.set('StageName', 'Closed Won');
+            org.update({ sobject: oppty }, function(err, resp){
+              if(!err) console.log('It worked!');
+            });
+        }
+    });
+};
+
+
 let getTopOpportunities = count => {
 
     count = count || 5;
@@ -116,3 +134,4 @@ exports.findContact = findContact;
 exports.findContactsByAccount = findContactsByAccount;
 exports.getTopOpportunities = getTopOpportunities;
 exports.findOpportunitiesByAccount = findOpportunitiesByAccount;
+exports.closeWonOpportunityById = closeWonOpportunityById;
