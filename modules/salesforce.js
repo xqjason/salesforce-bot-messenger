@@ -41,6 +41,21 @@ let findAccount = name => {
 
 };
 
+let findAccountById = accountId => {
+    return new Promise((resolve, reject) => {
+        let q = "SELECT Id, Name FROM Account WHERE Id = '" + accountId + "' LIMIT 1";
+        org.query({query: q}, (err, resp) => {
+            if (err) {
+                reject("An error as occurred");
+            } else if (resp.records && resp.records.length>0) {
+                let accounts = resp.records;
+                resolve(accounts);
+            }
+        });
+    });
+
+};
+
 let findContact = name => {
 
     return new Promise((resolve, reject) => {
@@ -141,6 +156,7 @@ login();
 
 exports.org = org;
 exports.findAccount = findAccount;
+exports.findAccountById = findAccountById;
 exports.findContact = findContact;
 exports.findContactsByAccount = findContactsByAccount;
 exports.getTopOpportunities = getTopOpportunities;

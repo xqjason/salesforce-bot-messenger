@@ -16,6 +16,10 @@ let formatAccounts = accounts => {
                 "title":"View Opportunities",
                 "payload": "view_Opportunities," + account.getId() + "," + account.get("Name")
             },{
+                "type":"postback",
+                "title":"Attach File",
+                "payload": "attach_file," + account.getId() + "," + account.get("Name")
+            },{
                 "type": "web_url",
                 "url": "https://login.salesforce.com/" + account.getId(),
                 "title": "Open in Salesforce"
