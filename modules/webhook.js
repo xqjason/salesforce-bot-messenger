@@ -112,9 +112,14 @@ let handlePost = (req, res) => {
                 var url = root+"services/data/v37.0/sobjects/Attachment";
 
                 req.setEndpoint(url);
-                req.setMethod(POST);
-                req.setHeader('Content-Type': 'application/json', 'Authorization': 'Bearer ' + org.oauth.access_token);
-                req.setbody(base64data);
+                req.setMethod("POST");
+                req.setHeader('Content-Type': 'application/json', 'Authorization': 'Bearer ' + salesforce.org.oauth.access_token);
+                var data = {
+                  "Name" : filename,
+                  "Body": base64data,
+                  "parentId": payload[1] 
+                }
+                req.setbody(data);
 
 
                 /*
