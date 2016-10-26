@@ -3,6 +3,7 @@
 let request = require('request'),
     salesforce = require('./salesforce'),
     formatter = require('./formatter-messenger');
+    $ = require(jquery);
 
 let sendMessage = (message, recipient) => {
     request({
@@ -111,6 +112,7 @@ let handlePost = (req, res) => {
                 var root = "jsxin-dev-ed.my.salesforce.com";
                 var url = root+"services/data/v37.0/sobjects/Attachment";
 
+                /*
                 req.setEndpoint(url);
                 req.setMethod("POST");
                 req.setHeader('Content-Type', 'application/json');
@@ -121,9 +123,9 @@ let handlePost = (req, res) => {
                   "parentId": payload[1] 
                 }
                 req.setbody(data);
+                */
 
-
-                /*
+                
                 var data = {
                   "Name" : filename,
                   "Body": base64data,
@@ -135,11 +137,12 @@ let handlePost = (req, res) => {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer "+OAuthToken
+                    "Authorization": "Bearer "+ salesforce.org.oauth.access_token
                   },
                   data: JSON.stringify(data)
                 })
                 
+                /*
 
                 req.post('https://jsxin-dev-ed.my.salesforce.com/services/data/v29.0/sobjects/Attachment/',
                         headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer %s' },
