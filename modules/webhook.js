@@ -102,13 +102,7 @@ let handlePost = (req, res) => {
                 salesforce.closeWonOpportunityById(payload[1]);
             } else if (payload[0] === "close_lost") {
                 sendMessage({text: `I'm sorry to hear that. I closed the opportunity "${payload[2]}" as "Close Lost".`}, sender);
-            }
-            if (payload[0] === "attach_file")
-            {
-                let filepath = "image.png";
-                let base64data = new Buffer(filepath).toString('base64');
-                salesforce.findAccountById(payload[1]).setAttachement(filepath,base64data);
-            }   
+            }            
         }
     }    
 };
