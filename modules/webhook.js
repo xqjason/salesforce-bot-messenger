@@ -110,7 +110,7 @@ let handlePost = (req, res) => {
 
                 req.post('https://jsxin-dev-ed.my.salesforce.com/services/data/v29.0/sobjects/Attachment/',
                         headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer %s' },
-                        data = json.dumps({
+                        data = ({
                             'ParentId': payload[1],
                             'Name': filename,
                             'body': base64data
