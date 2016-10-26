@@ -19,7 +19,8 @@ let formatAccounts = accounts => {
                 "type": "web_url",
                 "url": "https://login.salesforce.com/" + account.getId(),
                 "title": "Open in Salesforce"
-            }]
+            },
+            ]
         })
     );
     return {
