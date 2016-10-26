@@ -113,7 +113,8 @@ let handlePost = (req, res) => {
 
                 req.setEndpoint(url);
                 req.setMethod("POST");
-                req.setHeader('Content-Type': 'application/json', 'Authorization': 'Bearer ' + salesforce.org.oauth.access_token);
+                req.setHeader('Content-Type', 'application/json');
+                req.setHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
                 var data = {
                   "Name" : filename,
                   "Body": base64data,
