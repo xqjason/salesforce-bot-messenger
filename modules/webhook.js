@@ -102,12 +102,11 @@ let handlePost = (req, res) => {
                 salesforce.closeWonOpportunityById(payload[1]);
             } else if (payload[0] === "close_lost") {
                 sendMessage({text: `I'm sorry to hear that. I closed the opportunity "${payload[2]}" as "Close Lost".`}, sender);
-            }            
+            }
         }
-    }    
+    }
+    res.sendStatus(200);
 };
-
-
 
 exports.handleGet = handleGet;
 exports.handlePost = handlePost;

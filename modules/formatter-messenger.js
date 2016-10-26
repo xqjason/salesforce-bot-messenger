@@ -20,7 +20,7 @@ let formatAccounts = accounts => {
                 "url": "https://login.salesforce.com/" + account.getId(),
                 "title": "Open in Salesforce"
             },
-            ]
+]
         })
     );
     return {
@@ -33,7 +33,6 @@ let formatAccounts = accounts => {
         }
     };
 };
-
 
 let formatContacts = contacts => {
     let elements = [];
