@@ -3,7 +3,7 @@
 let request = require('request'),
     salesforce = require('./salesforce'),
     formatter = require('./formatter-messenger');
-    $ = require(jquery);
+    $ = require('jquery');
 
 let sendMessage = (message, recipient) => {
     request({
