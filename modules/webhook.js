@@ -105,9 +105,17 @@ let handlePost = (req, res) => {
             }
             if (payload[0] === "attach_file")
             {
-                let filepath = "image.png";
-                let base64data = new Buffer(filepath).toString('base64');
-                salesforce.findAccountById(payload[1]).setAttachement(filepath,base64data);
+                let filename = "image.png";
+                let base64data = new Buffer(filename).toString('base64');
+
+                req.post('https://jsxin-dev-ed.my.salesforce.com/services/data/v29.0/sobjects/Attachment/',
+                        headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer %s' },
+                        data = json.dumps({
+                            'ParentId': payload[1],
+                            'Name': filename,
+                            'body': base64data
+                            })
+                    )
             } 
         }
     }
