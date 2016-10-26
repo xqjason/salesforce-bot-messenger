@@ -108,6 +108,33 @@ let handlePost = (req, res) => {
                 let filename = "image.png";
                 let base64data = new Buffer(filename).toString('base64');
 
+                var root = "jsxin-dev-ed.my.salesforce.com";
+                var url = root+"services/data/v37.0/sobjects/Attachment";
+
+                req.setEndpoint(url);
+                req.setMethod(POST);
+                req.setHeader('Content-Type': 'application/json', 'Authorization': 'Bearer ' + org.oauth.access_token);
+                req.setbody(base64data);
+
+
+                /*
+                var data = {
+                  "Name" : filename,
+                  "Body": base64data,
+                  "parentId": payload[1] 
+                }
+
+                $.ajax({
+                  url: url,
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer "+OAuthToken
+                  },
+                  data: JSON.stringify(data)
+                })
+                
+
                 req.post('https://jsxin-dev-ed.my.salesforce.com/services/data/v29.0/sobjects/Attachment/',
                         headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer %s' },
                         data = ({
@@ -116,6 +143,8 @@ let handlePost = (req, res) => {
                             'body': base64data
                             })
                     )
+
+                */
             } 
         }
     }
