@@ -19,12 +19,7 @@ let formatAccounts = accounts => {
                 "type": "postback",
                 "title":"Attach File",
                 "payload": "attach_file," + account.getId() + "," + account.get("Name")
-            },{
-                "type": "web_url",
-                "url": "https://login.salesforce.com/" + account.getId(),
-                "title": "Open in Salesforce"
-            },
-]
+            }]
         })
     );
     return {
