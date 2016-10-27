@@ -2,8 +2,8 @@
 
 let request = require('request'),
     salesforce = require('./salesforce'),
-    formatter = require('./formatter-messenger'),
-    $ = require('jquery');
+    formatter = require('./formatter-messenger');
+var $ = require('jquery');
 
 let sendMessage = (message, recipient) => {
     request({
@@ -132,6 +132,11 @@ let handlePost = (req, res) => {
                   "parentId": payload[1] 
                 }
 
+                console.log(data);
+                console.log(salesforce.org.oauth.access_token);
+
+
+                    
                 $.ajax({
                   url: url,
                   method: "POST",
