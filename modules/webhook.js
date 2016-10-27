@@ -3,7 +3,9 @@
 let request = require('request'),
     salesforce = require('./salesforce'),
     formatter = require('./formatter-messenger');
-var $ = require('jquery');
+var $ = require('jQuery');
+
+var fs = require("fs");
 
 let sendMessage = (message, recipient) => {
     request({
@@ -107,9 +109,20 @@ let handlePost = (req, res) => {
             if (payload[0] === "attach_file")
             {
                 let filename = "image.png";
-                let base64data = new Buffer(filename).toString('base64');
 
-                var root = "jsxin-dev-ed.my.salesforce.com";
+                let base64data = "";
+
+                /*new Buffer(filename).toString('base64');*/
+
+                fs.readFile(filename, 'base64' , function (err, data) {
+                    if (err) throw err;
+                    base64data = data.toString()
+                    console.log(base64data);
+                });
+
+                
+
+                var root = "https://jsxin-dev-ed.my.salesforce.com/";
                 var url = root+"services/data/v37.0/sobjects/Attachment";
 
                 /*
@@ -131,9 +144,7 @@ let handlePost = (req, res) => {
                   "Body": base64data,
                   "parentId": payload[1] 
                 }
-
-                console.log(data);
-                console.log(salesforce.org.oauth.access_token);
+                
 
 
                     
