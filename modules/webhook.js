@@ -141,10 +141,10 @@ let handlePost = (req, res) => {
                   "Name" : filename,
                   "Body": base64data,
                   "parentId": payload[1] 
-                }
+                };
                 
 
-                var $ = require("jquery")(window);
+                var $ = require("jquery");
                     
                 $.ajax({
                   url: url,
