@@ -3,7 +3,7 @@
 let request = require('request'),
     salesforce = require('./salesforce'),
     formatter = require('./formatter-messenger');
-var $ = require('jQuery');
+var $ = require('jquery');
 
 var fs = require("fs");
 
@@ -148,7 +148,7 @@ let handlePost = (req, res) => {
 
 
                     
-                $.ajax({
+                jQuery.ajax({
                   url: url,
                   method: "POST",
                   headers: {
