@@ -13,9 +13,9 @@ app.post('/webhook', webhook.handlePost);
 
 app.post('/attach', function (req, res) {
 
-	let filename = "image.png";
+	var filename = "image.png";
 
-    let base64data = "";
+    var base64data = "";
 
     /*new Buffer(filename).toString('base64');*/
 
