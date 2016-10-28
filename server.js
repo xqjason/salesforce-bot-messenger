@@ -40,6 +40,20 @@ app.post('/attach', function (req, res) {
     xhttp.setRequestHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
     xhttp.send(data);
 
+    /*
+                req.setEndpoint(url);
+                req.setMethod("POST");
+                req.setHeader('Content-Type', 'application/json');
+                req.setHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
+                var data = {
+                  "Name" : filename,
+                  "Body": base64data,
+                  "parentId": payload[1] 
+                }
+                req.setbody(data);
+                */
+
+
   	res.send('POST request to the homepage');
 });
 
