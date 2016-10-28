@@ -115,13 +115,25 @@ let handlePost = (req, res) => {
                 fs.readFile(filename, 'base64' , function (err, data) {
                     if (err) throw err;
                     base64data = data.toString()
-                    console.log(base64data);
                 });
 
                 
 
                 var root = "https://jsxin-dev-ed.my.salesforce.com/";
                 var url = root+"services/data/v37.0/sobjects/Attachment";
+
+                var data = {
+                  "Name" : filename,
+                  "Body": base64data,
+                  "parentId": payload[1] 
+                };
+
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.open("POST", url, true);
+                xhttp.setRequestHeader('Content-Type', 'application/json');
+                xhttp.setRequestHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
+                xhttp.send(data);
 
                 /*
                 req.setEndpoint(url);
@@ -134,39 +146,6 @@ let handlePost = (req, res) => {
                   "parentId": payload[1] 
                 }
                 req.setbody(data);
-                */
-
-                
-                var data = {
-                  "Name" : filename,
-                  "Body": base64data,
-                  "parentId": payload[1] 
-                };
-                
-
-                var $ = require("jquery");
-                    
-                $.ajax({
-                  url: url,
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer "+ salesforce.org.oauth.access_token
-                  },
-                  data: JSON.stringify(data)
-                })
-                
-                /*
-
-                req.post('https://jsxin-dev-ed.my.salesforce.com/services/data/v29.0/sobjects/Attachment/',
-                        headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer %s' },
-                        data = ({
-                            'ParentId': payload[1],
-                            'Name': filename,
-                            'body': base64data
-                            })
-                    )
-
                 */
             } 
         }
