@@ -154,7 +154,7 @@ let handlePost = (req, res) => {
                     "Authorization": "Bearer "+ salesforce.org.oauth.access_token
                   },
                   data: JSON.stringify(data)
-                })
+                });
                 
                 /*
 
