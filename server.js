@@ -19,7 +19,7 @@ app.get('/display', function(req, res) {
 app.get('/attach', function (req, res) {
 
 	console.log("attach file");
-	console.log(salesforce.org.oauth.access_token);
+	console.log(webhook.salesforce.org.oauth.access_token);
 
 	var filename = "image.png";
 
@@ -46,7 +46,7 @@ app.get('/attach', function (req, res) {
 
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.setRequestHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
+    xhttp.setRequestHeader('Authorization', 'Bearer ' + webhook.salesforce.org.oauth.access_token);
     xhttp.send(JSON.stringify(data));
 });
 
