@@ -92,7 +92,8 @@ let handlePost = (req, res) => {
         } else if (event.message && event.message.text) {
             processText(event.message.text, sender);
         } else if (event.message && event.message.attachments) {
-            console.log(event.message.attachments[0].payload.url);
+            console.log(event.message.attachments);
+            console.log(payload[1]);
             res.redirect("/attach/" + payload[1]);            
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
