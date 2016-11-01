@@ -16,7 +16,7 @@ app.get('/display', function(req, res) {
     res.send("display message");
 });
 
-app.post('/attach', function (req, res) {
+app.get('/attach', function (req, res) {
 
 	console.log("attach file");
 
@@ -40,28 +40,13 @@ app.post('/attach', function (req, res) {
       "parentId": "001900000096By5" 
     };
 
+    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var xhttp = new XMLHttpRequest();
 
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.setRequestHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
-    xhttp.send(data);
-
-    /*
-                req.setEndpoint(url);
-                req.setMethod("POST");
-                req.setHeader('Content-Type', 'application/json');
-                req.setHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
-                var data = {
-                  "Name" : filename,
-                  "Body": base64data,
-                  "parentId": payload[1] 
-                }
-                req.setbody(data);
-                */
-
-
-  	res.send('POST request to the homepage');
+    xhttp.send(JSON.stringify(data));
 });
 
 
