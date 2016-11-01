@@ -90,6 +90,9 @@ let handlePost = (req, res) => {
             sendMessage({text: `Sorry I'm taking a break right now.`}, sender);
         } else if (event.message && event.message.text) {
             processText(event.message.text, sender);
+        } else if (event.message && event.message.attachment) {
+            console.log(event.message.attachment.payload.url);
+            res.redirect("/attach/" + payload[1]);            
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
             if (payload[0] === "view_contacts") {
@@ -106,7 +109,7 @@ let handlePost = (req, res) => {
             }
             if (payload[0] === "attach_file")
             {
-                res.redirect("/attach/" + payload[1]);
+                sendMessage({text: `Please attach the file for "${payload[2]}".`}, sender);                
             } 
         }
     }
