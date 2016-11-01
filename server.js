@@ -11,7 +11,8 @@ app.use(bodyParser.json());
 app.get('/webhook', webhook.handleGet);
 app.post('/webhook', webhook.handlePost);
 
-app.get('/display', function(req, res) {    
+app.get('/display', function(req, res) {  
+	console.log("display message");  
     res.send("display message");
 });
 
