@@ -106,7 +106,7 @@ let handlePost = (req, res) => {
             }
             if (payload[0] === "attach_file")
             {
-                res.redirect("/attach");
+                res.redirect("/attach/" + payload[1]);
             } 
         }
     }

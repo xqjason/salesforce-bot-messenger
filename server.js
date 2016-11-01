@@ -12,16 +12,10 @@ app.use(bodyParser.json());
 app.get('/webhook', webhook.handleGet);
 app.post('/webhook', webhook.handlePost);
 
-app.get('/display', function(req, res) {  
-	console.log("display message");  
-    res.send("display message");
-});
-
-app.get('/attach', function (req, res) {
+app.get('/attach/:id', function (req, res) {
 
 	console.log("attach file");
-	console.log(salesforce.org.oauth.access_token);
-
+	
 	var filename = "image.png";
 
     var base64data = "";
@@ -39,7 +33,7 @@ app.get('/attach', function (req, res) {
     var data = {
       "Name" : filename,
       "Body": base64data,
-      "parentId": "001900000096By5" 
+      "parentId": req.params.id
     };
 
     var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
