@@ -1,6 +1,7 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
     webhook = require('./modules/webhook'),
+    salesforce = require('./modules/salesforce'), 
     fs = require("fs"),
     app = express();
 
@@ -46,7 +47,7 @@ app.get('/attach', function (req, res) {
 
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.setRequestHeader('Authorization', 'Bearer ' + webhook.salesforce.org.oauth.access_token);
+    xhttp.setRequestHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
     xhttp.send(JSON.stringify(data));
 });
 
