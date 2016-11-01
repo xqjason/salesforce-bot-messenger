@@ -20,7 +20,7 @@ app.get('/display', function(req, res) {
 app.get('/attach', function (req, res) {
 
 	console.log("attach file");
-	console.log(webhook.salesforce.org.oauth.access_token);
+	console.log(salesforce.org.oauth.access_token);
 
 	var filename = "image.png";
 
