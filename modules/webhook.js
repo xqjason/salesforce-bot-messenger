@@ -84,8 +84,6 @@ let handleGet = (req, res) => {
 let handlePost = (req, res) => {
     let events = req.body.entry[0].messaging;
 
-    console.log(events);
-
     for (let i = 0; i < events.length; i++) {
         let event = events[i];
         let sender = event.sender.id;
@@ -93,8 +91,8 @@ let handlePost = (req, res) => {
             sendMessage({text: `Sorry I'm taking a break right now.`}, sender);
         } else if (event.message && event.message.text) {
             processText(event.message.text, sender);
-        } else if (event.message && event.message.attachment) {
-            console.log(event.message.attachment.payload.url);
+        } else if (event.message && event.message.attachments) {
+            console.log(event.message.attachments[0].payload.url);
             res.redirect("/attach/" + payload[1]);            
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
