@@ -83,6 +83,7 @@ let handleGet = (req, res) => {
 
 let handlePost = (req, res) => {
     let events = req.body.entry[0].messaging;
+    let uploadId = "";
 
     for (let i = 0; i < events.length; i++) {
         let event = events[i];
@@ -92,9 +93,8 @@ let handlePost = (req, res) => {
         } else if (event.message && event.message.text) {
             processText(event.message.text, sender);
         } else if (event.message && event.message.attachments) {
-            console.log(event.message.attachments);
-            console.log(payload[1]);
-            res.redirect("/attach/" + payload[1]);            
+            console.log(event.message.attachments);            
+            res.redirect("/attach/" + uploadId);            
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
             if (payload[0] === "view_contacts") {
@@ -111,7 +111,8 @@ let handlePost = (req, res) => {
             }
             if (payload[0] === "attach_file")
             {
-                sendMessage({text: `Please attach the file for "${payload[2]}".`}, sender);                
+                uploadId = payload[1];
+                sendMessage({text: `Please attach the file for "${payload[2]}".`}, sender); 
             } 
         }
     }
