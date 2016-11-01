@@ -3,7 +3,7 @@
 let request = require('request'),
     salesforce = require('./salesforce'),
     formatter = require('./formatter-messenger');
-var fs = require("fs");
+
 
 let sendMessage = (message, recipient) => {
     request({
@@ -106,68 +106,8 @@ let handlePost = (req, res) => {
             }
             if (payload[0] === "attach_file")
             {
-                let filename = "image.png";
-
-                let base64data = "";
-
-                /*new Buffer(filename).toString('base64');*/
-
-                fs.readFile(filename, 'base64' , function (err, data) {
-                    if (err) throw err;
-                    base64data = data.toString()
-                    console.log(base64data);
-                });
-
-                
-
-                var root = "https://jsxin-dev-ed.my.salesforce.com/";
-                var url = root+"services/data/v37.0/sobjects/Attachment";
-
-                /*
-                req.setEndpoint(url);
-                req.setMethod("POST");
-                req.setHeader('Content-Type', 'application/json');
-                req.setHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
-                var data = {
-                  "Name" : filename,
-                  "Body": base64data,
-                  "parentId": payload[1] 
-                }
-                req.setbody(data);
-                */
-
-                
-                var data = {
-                  "Name" : filename,
-                  "Body": base64data,
-                  "parentId": payload[1] 
-                };
-                
-
-                var $ = require("jquery");
-                    
-                $.ajax({
-                  url: url,
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer "+ salesforce.org.oauth.access_token
-                  },
-                  data: JSON.stringify(data)
-                });
-                
-                /*
-
-                req.post('https://jsxin-dev-ed.my.salesforce.com/services/data/v29.0/sobjects/Attachment/',
-                        headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer %s' },
-                        data = ({
-                            'ParentId': payload[1],
-                            'Name': filename,
-                            'body': base64data
-                            })
-                    )
-
-                */
+                console.log("attach a file");
+                res.redirect("/display");
             } 
         }
     }
