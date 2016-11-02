@@ -89,15 +89,15 @@ let handlePost = (req, res) => {
         let sender = event.sender.id;        
         if (process.env.MAINTENANCE_MODE && ((event.message && event.message.text) || event.postback)) {
             sendMessage({text: `Sorry I'm taking a break right now.`}, sender);
+            res.sendStatus(200);
         } else if (event.message && event.message.text) {
             console.log("process text");
             processText(event.message.text, sender);
+            res.sendStatus(200);
         } else if (event.message && event.message.attachments[0].type === 'image') {
              console.log("process image");
              var furl = event.message.attachments[0].payload.url;
              var vpath = furl.substr(0, furl.indexOf('?'));
-             
-             
              try{
                 res.redirect("/" + uploadId + "/attach/" + vpath);   
                 res.sendStatus(200);
@@ -112,23 +112,26 @@ let handlePost = (req, res) => {
             if (payload[0] === "view_contacts") {
                 sendMessage({text: "OK, looking for your contacts at " + payload[2] + "..."}, sender);
                 salesforce.findContactsByAccount(payload[1]).then(contacts => sendMessage(formatter.formatContacts(contacts), sender));
+                res.sendStatus(200); 
             }if (payload[0] === "view_Opportunities") {
                 sendMessage({text: "OK, looking for your open opportunities at " + payload[2] + "..."}, sender);
                 salesforce.findOpportunitiesByAccount(payload[1]).then(opportunities => sendMessage(formatter.formatOpportunities(opportunities), sender));
+                res.sendStatus(200); 
             } else if (payload[0] === "close_won") {
                 sendMessage({text: `OK, I closed the opportunity "${payload[2]}" as "Close Won". `}, sender);
                 salesforce.closeWonOpportunityById(payload[1]);
+                res.sendStatus(200); 
             } else if (payload[0] === "close_lost") {
                 sendMessage({text: `I'm sorry to hear that. I closed the opportunity "${payload[2]}" as "Close Lost".`}, sender);
+                res.sendStatus(200); 
             }
             if (payload[0] === "attach_file")
             {
                 uploadId = payload[1];                
                 sendMessage({text: `Please attach the image for "${payload[2]}".`}, sender); 
-            } 
+            }                    
         }
-    }
-    //res.sendStatus(200);
+    }    
 };
 
 exports.handleGet = handleGet;
