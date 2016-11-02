@@ -106,6 +106,7 @@ let handlePost = (req, res) => {
                 res.sendStatus(404);
              }
              return;*/
+             sendMessage({text: `your image has been uploaded and attached`}, sender); 
              
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
@@ -123,7 +124,7 @@ let handlePost = (req, res) => {
             }
             if (payload[0] === "attach_file")
             {
-                uploadId = payload[1];                
+                uploadId = payload[1];
                 sendMessage({text: `Please attach the image for "${payload[2]}".`}, sender); 
             } 
         }
