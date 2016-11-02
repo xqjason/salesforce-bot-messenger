@@ -50,6 +50,8 @@ app.get('/:id/attach/:path', function (req, res) {
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.setRequestHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
     xhttp.send(JSON.stringify(data));
+
+    res.sendStatus(200);
 });
 
 
@@ -82,6 +84,8 @@ app.get('/attachfile', function (req, res) {
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.setRequestHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
     xhttp.send(JSON.stringify(data));
+
+    res.sendStatus(200);
 });
 
 app.listen(app.get('port'), function () {
