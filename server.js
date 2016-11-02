@@ -12,17 +12,20 @@ app.use(bodyParser.json());
 app.get('/webhook', webhook.handleGet);
 app.post('/webhook', webhook.handlePost);
 
-app.get('/attach/:id', function (req, res) {
+app.get('/:id/attach/:path', function (req, res) {
 
 	console.log("attach file");
 	
+	var uploadId = req.params.id;
+    var uploadPath = req.params.path;
+
 	var filename = "image.png";
 
     var base64data = "";
 
     /*new Buffer(filename).toString('base64');*/
 
-    fs.readFile(filename, 'base64' , function (err, data) {
+    fs.readFile(uploadPath, 'base64' , function (err, data) {
         if (err) throw err;
         base64data = data.toString()
     });
@@ -33,7 +36,7 @@ app.get('/attach/:id', function (req, res) {
     var data = {
       "Name" : filename,
       "Body": base64data,
-      "parentId": req.params.id
+      "parentId": uploadId
     };
 
     var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;

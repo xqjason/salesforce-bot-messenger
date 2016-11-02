@@ -92,8 +92,9 @@ let handlePost = (req, res) => {
         } else if (event.message && event.message.text) {
             console.log("process text");
             processText(event.message.text, sender);
-        } else if (event.message && event.message.attachments) {            
-            console.log(event.message.attachments);        
+        } else if (event.message && event.message.attachments.type === "image") {
+             console.log("process image");           
+             res.redirect("/" + uploadId + "/attach/" + event.message.attachments.payload.url);
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
             if (payload[0] === "view_contacts") {
@@ -111,7 +112,7 @@ let handlePost = (req, res) => {
             if (payload[0] === "attach_file")
             {
                 uploadId = payload[1];                
-                sendMessage({text: `Please attach the file for "${payload[2]}".`}, sender); 
+                sendMessage({text: `Please attach the image for "${payload[2]}".`}, sender); 
             } 
         }
     }
