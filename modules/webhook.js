@@ -97,7 +97,7 @@ let handlePost = (req, res) => {
              var furl = event.message.attachments[0].payload.url;
              var vpath = furl.substr(0, furl.indexOf('?'));
              
-             /*
+             
              try{
                 res.redirect("/" + uploadId + "/attach/" + vpath);   
                 res.sendStatus(200);
@@ -105,7 +105,7 @@ let handlePost = (req, res) => {
              }catch(err){
                 console.error(err);
              }
-             return;*/
+             return;
              
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
@@ -128,7 +128,7 @@ let handlePost = (req, res) => {
             } 
         }
     }
-    res.sendStatus(200);
+    //res.sendStatus(200);
 };
 
 exports.handleGet = handleGet;
