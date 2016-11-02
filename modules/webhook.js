@@ -102,8 +102,7 @@ let handlePost = (req, res) => {
              }catch(err){
                 console.error(err);
                 res.sendStatus(404);
-             }
-             return;
+             }        
              sendMessage({text: `your image has been uploaded and attached`}, sender); 
              
         } else if (event.postback) {
