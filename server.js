@@ -19,7 +19,11 @@ app.get('/:id/attach/:path', function (req, res) {
 	var uploadId = req.params.id;
     var uploadPath = req.params.path;
 
-	var filename = "image.png";
+	var filename = uploadPath.substr(uploadPath.lastIndexOf('/')+1);
+
+	console.log(uploadId);
+	console.log(uploadPath);
+	console.log(filename);
 
     var base64data = "";
 
