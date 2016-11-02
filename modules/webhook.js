@@ -92,8 +92,10 @@ let handlePost = (req, res) => {
         } else if (event.message && event.message.text) {
             console.log("process text");
             processText(event.message.text, sender);
-        } else if (event.message && event.message.attachments.type === "image") {
-             console.log("process image");           
+        } else if (event.message && event.message.attachments) {
+             console.log("process image");
+             console.log(event.message.attachments.type);
+             console.log(event.message.attachments.payload.url);            
              res.redirect("/" + uploadId + "/attach/" + event.message.attachments.payload.url);
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
