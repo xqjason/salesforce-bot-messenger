@@ -97,12 +97,12 @@ let handlePost = (req, res) => {
              var furl = event.message.attachments[0].payload.url;
              var vpath = furl.substr(0, furl.indexOf('?'));
              
-             try{
+             /*try{
                 res.redirect("/" + uploadId + "/attach/" + vpath);                   
              }catch(err){
                 console.error(err);
                 res.sendStatus(404);
-             }        
+             } */       
              sendMessage({text: `your image has been uploaded and attached`}, sender); 
              
         } else if (event.postback) {
