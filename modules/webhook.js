@@ -97,6 +97,8 @@ let handlePost = (req, res) => {
              var furl = event.message.attachments[0].payload.url;
              var vpath = furl.substr(0, furl.indexOf('?'));
              res.redirect("/" + uploadId + "/attach/" + vpath);
+             res.sendStatus(200);
+             return;
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
             if (payload[0] === "view_contacts") {
