@@ -53,6 +53,37 @@ app.get('/:id/attach/:path', function (req, res) {
 });
 
 
+app.get('/attachfile', function (req, res) {
+
+    console.log("attach file");
+
+    var filename = "image.png"
+
+    var base64data = "";
+
+    fs.readFile(filename, 'base64' , function (err, data) {
+        if (err) throw err;
+        base64data = data.toString()
+    });
+
+    var root = "https://jsxin-dev-ed.my.salesforce.com/";
+    var url = root+"services/data/v37.0/sobjects/Attachment";
+
+    var data = {
+      "Name" : filename,
+      "Body": base64data,
+      "parentId": "001900000096By5"
+    };
+
+    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.setRequestHeader('Authorization', 'Bearer ' + salesforce.org.oauth.access_token);
+    xhttp.send(JSON.stringify(data));
+});
+
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
