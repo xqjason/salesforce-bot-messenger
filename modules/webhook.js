@@ -92,11 +92,12 @@ let handlePost = (req, res) => {
         } else if (event.message && event.message.text) {
             console.log("process text");
             processText(event.message.text, sender);
-        } else if (event.message && event.message.attachments) {
+        } else if (event.message && event.message.attachments[0].type === 'image') {
              console.log("process image");
-             console.log(event.message.attachments[0].type);
-             console.log(event.message.attachments[0].payload.url);            
-             //res.redirect("/" + uploadId + "/attach/" + event.message.attachments.payload.url);
+             var furl = event.message.attachments[0].payload.url;
+             var vpath = furl.substr(0, furl.indexOf('?'));
+             console.log(vpath);   
+             //res.redirect("/" + uploadId + "/attach/" + );
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
             if (payload[0] === "view_contacts") {
