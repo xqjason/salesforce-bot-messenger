@@ -94,9 +94,9 @@ let handlePost = (req, res) => {
             processText(event.message.text, sender);
         } else if (event.message && event.message.attachments) {
              console.log("process image");
-             console.log(event.message.attachments.type);
-             console.log(event.message.attachments.payload.url);            
-             res.redirect("/" + uploadId + "/attach/" + event.message.attachments.payload.url);
+             console.log(event.message.attachments[0].type);
+             console.log(event.message.attachments[0].payload.url);            
+             //res.redirect("/" + uploadId + "/attach/" + event.message.attachments.payload.url);
         } else if (event.postback) {
             let payload = event.postback.payload.split(",");
             if (payload[0] === "view_contacts") {
